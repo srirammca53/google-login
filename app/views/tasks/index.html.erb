@@ -1,0 +1,49 @@
+<h1>Listing tasks</h1>
+ <% if current_user %>
+	<table>
+	  <tr>
+	    <th>Task</th>
+	    <th>Description</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+
+		<% @tasks.each do |task| %>
+		 <% if task.user_id  == current_user.id %>
+		  <tr>
+		    <td><%= task.task %></td>
+		    <td><%= task.description %></td>
+		    <td><%= link_to 'Show', task %></td>
+		    <td><%= link_to 'Edit', edit_task_path(task) %></td>
+		    <td><%= link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+		  </tr>
+		<% end %>
+	       <% end %>
+	</table>
+ <% else %>
+	<table>
+	  <tr>
+	    <th>Task</th>
+	    <th>Description</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+
+		<% @tasks.each do |task| %>
+
+		  <tr>
+		    <td><%= task.task %></td>
+		    <td><%= task.description %></td>
+		    <td><%= link_to 'Show', task %></td>
+		    <td><%= link_to 'Edit', edit_task_path(task) %></td>
+		    <td><%= link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+		  </tr>
+		<% end %>
+
+</table>
+<% end %>
+<br />
+
+<%= link_to 'New Task', new_task_path %>
